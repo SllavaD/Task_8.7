@@ -2,3 +2,53 @@
     height: 100vh;
     font-family: 'Open Sans', monospace;
 }
+
+body {
+    background: black;
+}
+
+.card-header {
+    font-weight: bold;
+    background: #dc3545;
+    text-shadow: 1px 1px 2px pink;
+}
+
+.card-body {
+    color: wheat;
+    font-weight: bolder;
+    text-shadow: 1px 1px 2px black;
+    background: #7c2931;
+}
+
+.card-footer {
+    font-weight: bold;
+    background: #dc3545;
+    text-shadow: 1px 1px 2px white, 0 0 1em whitesmoke, 0 0 0.2em black;
+}
+
+#btnRetry {
+    color: wheat;
+    font-weight: bolder;
+    text-shadow: 1px 1px 2px black;
+}
+
+#btnLess {
+    background: rgb(206, 33, 33);
+    font-weight: bolder;
+    text-shadow: 1px 1px 2px black;
+    border-color: whitesmoke;
+}
+
+#btnOver {
+    background: rgb(206, 33, 33);
+    font-weight: bolder;
+    text-shadow: 1px 1px 2px black;
+    border-color: whitesmoke;
+}
+
+#btnEqual {
+    background: black;
+    font-weight: bolder;
+    text-shadow: 1px 1px 2px rgb(212, 55, 55);
+    border-color: whitesmoke;
+}
