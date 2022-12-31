@@ -14,8 +14,46 @@ let gameRun = true;
 const orderNumberField = document.getElementById('orderNumberField');
 const answerField = document.getElementById('answerField');
 
+let units = ['', 'один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять'];
+let teens = ['', 'десять', 'одинадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать'];
+let dozens = ['', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят', 'девяносто'];
+let hundreds = ['', 'сто', 'двести', 'триста', 'четыреста', 'пятьсот', 'шестьсот', 'семьсот', 'восемьсот', 'девятьсот'];
+
+function numberToText() { 
+    let number = Math.abs(answerNumber);
+    let text = '';
+      if (number == 0) {
+          text = 'ноль';
+          return text;
+      }
+      if (number <= 9) {
+          return units[Math.floor(Math.abs(number) / 1)];
+      }
+      if (number > 9 && number < 20) {
+          return teens[Math.floor(number / 10 + number % 10)];
+      }
+      if (number >= 20 && number <= 99) {
+          return dozens[(Math.floor(number / 10)) - 1] + " " + units[Math.floor(number % 10)];
+      }
+      if (number >= 100 && number <= 999) {
+          return hundreds[Math.floor(number / 100)] + " " + numberToTextHundreds();
+      }
+    }
+function numberToTextHundreds() { 
+    let unitsTeensDozens = Math.abs(answerNumber) % 100;
+      if (unitsTeensDozens <= 9) {
+          return units[Math.floor(unitsTeensDozens / 1)];
+      }
+      if (unitsTeensDozens > 9 && unitsTeensDozens < 20) {
+          return teens[(Math.floor(unitsTeensDozens / 10)) + (unitsTeensDozens % 10)];
+      }
+      if (unitsTeensDozens >= 20 && unitsTeensDozens <= 99) {
+          return dozens[(Math.floor(unitsTeensDozens / 10)) - 1] + " " + units[Math.floor(unitsTeensDozens % 10)];
+      }
+    }
+
 orderNumberField.innerText = orderNumber;
-answerField.innerText = `Вы загадали число ${answerNumber }?`;
+answerField.innerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? `Вы загадали число ${numberToText()}?` : `Вы загадали число ${answerNumber}?` : numberToText().length < 20 ? `Вы загадали число минус ${numberToText()}?` : `Вы загадали число ${answerNumber}?`;
 
 document.getElementById('btnRetry').addEventListener('click', function () {
     minValue = parseInt(prompt('Минимальное знание числа для игры','2'));
@@ -30,9 +68,9 @@ document.getElementById('btnRetry').addEventListener('click', function () {
     orderNumber = 1;
     answerNumber  = Math.floor((minValue + maxValue) / 2);
     orderNumberField.innerText = orderNumber;
-    answerField.innerText = `Вы загадали число ${answerNumber }?`;
+    answerField.innerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? `Вы загадали число ${numberToText()}?` : `Вы загадали число ${answerNumber}?` : numberToText().length < 20 ? `Вы загадали число минус ${numberToText()}?` : `Вы загадали число ${answerNumber}?`;
     gameRun = true;
-    
+  
 })
 
 document.getElementById('btnOver').addEventListener('click', function () {
@@ -60,7 +98,8 @@ document.getElementById('btnOver').addEventListener('click', function () {
                 answerPhrase = 'Нужно подумать... Быть может, это ';
             }
             
-            answerField.innerText = answerPhrase + answerNumber + '?';
+            answerField.innerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? `Вы загадали число ${numberToText()}?` : `Вы загадали число ${answerNumber}?` : numberToText().length < 20 ? `Вы загадали число минус ${numberToText()}?` : `Вы загадали число ${answerNumber}?`;
+            
             phraseRandom = 0;
             }  
         }
@@ -92,7 +131,8 @@ document.getElementById('btnLess').addEventListener('click', function () {
                 answerPhrase = 'Внимание на экран... твое число ';
             }
             
-            answerField.innerText = answerPhrase + answerNumber + '?';
+            answerField.innerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? `Вы загадали число ${numberToText()}?` : `Вы загадали число ${answerNumber}?` : numberToText().length < 20 ? `Вы загадали число минус ${numberToText()}?` : `Вы загадали число ${answerNumber}?`;
+
             phraseRandomLess = 0;
             }
         }
