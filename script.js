@@ -6,6 +6,9 @@ let maxValue = parseInt(prompt('Максимальное знание числа
 if (maxValue != 0) {maxValue = maxValue || 88};
 (maxValue < 1000) ? maxValue = maxValue : maxValue = 999;
 (maxValue > -1000) ? maxValue = maxValue : maxValue = -999;
+if (maxValue < minValue) {
+    [maxValue, minValue] = [minValue, maxValue];
+}
 alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
 let answerNumber  = Math.floor((minValue + maxValue) / 2);
 let orderNumber = 1;
@@ -56,14 +59,17 @@ orderNumberField.innerText = orderNumber;
 answerField.innerText = answerNumber >= 0 ? numberToText().length < 20 && answerNumber >= 0 ? `Вы загадали число ${numberToText()}?` : `Вы загадали число ${answerNumber}?` : numberToText().length < 20 ? `Вы загадали число минус ${numberToText()}?` : `Вы загадали число ${answerNumber}?`;
 
 document.getElementById('btnRetry').addEventListener('click', function () {
-    minValue = parseInt(prompt('Минимальное знание числа для игры','2'));
-    if (minValue != 0) {minValue = minValue || 7};
-    (minValue < 1000) ? minValue = minValue : minValue = 997;
-    (minValue > -1000) ? minValue = minValue : minValue = -997;
-    maxValue = parseInt(prompt('Максимальное знание числа для игры','99'));
-    if (maxValue != 0) {maxValue = maxValue || 77};
-    (maxValue < 1000) ? maxValue = maxValue : maxValue = 997;
-    (maxValue > -1000) ? maxValue = maxValue : maxValue = -997;
+    minValue = parseInt(prompt('Минимальное знание числа для игры','1'));
+    if (minValue != 0) {minValue = minValue || 8};
+    (minValue < 1000) ? minValue = minValue : minValue = 999;
+    (minValue > -1000) ? minValue = minValue : minValue = -999;
+    maxValue = parseInt(prompt('Максимальное знание числа для игры','100'));
+    if (maxValue != 0) {maxValue = maxValue || 88};
+    (maxValue < 1000) ? maxValue = maxValue : maxValue = 999;
+    (maxValue > -1000) ? maxValue = maxValue : maxValue = -999;
+    if (maxValue < minValue) {
+        [maxValue, minValue] = [minValue, maxValue]; // Значения меняются местами если max меньше min.
+    }
     alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
     orderNumber = 1;
     answerNumber  = Math.floor((minValue + maxValue) / 2);
@@ -108,7 +114,7 @@ document.getElementById('btnOver').addEventListener('click', function () {
 
 document.getElementById('btnLess').addEventListener('click', function () {
     if (gameRun){
-        if (minValue === maxValue){
+        if (minValue === maxValue || minValue == answerNumber){
             const phraseRandom = Math.round( Math.random());
             const answerPhrase = (phraseRandom === 1) ?
                 `Вы загадали неправильное число!\n\u{1F914}` :
